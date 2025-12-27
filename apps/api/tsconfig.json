@@ -1,6 +1,13 @@
 {
   "compilerOptions": {
-    "types": ["bun", "node"]
+    "types": ["bun", "node"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "ES2022"
   },
   "exclude": ["node_modules"]
 }
