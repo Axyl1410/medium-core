@@ -41,8 +41,19 @@ app.use("*", async (c, next) => {
   await next();
 });
 
-app.on(["POST", "GET"], "/api/auth/*", (c) => {
-  return auth.handler(c.req.raw);
+app.on(["POST", "GET"], "/api/auth/*", async (c) => {
+  try {
+    return await auth.handler(c.req.raw);
+  } catch (error) {
+    console.error("Auth handler error:", error);
+    return c.json(
+      {
+        error: "Internal server error",
+        message: error instanceof Error ? error.message : "Unknown error",
+      },
+      500
+    );
+  }
 });
 
 app.get("/session", (c) => {

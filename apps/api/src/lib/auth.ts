@@ -10,7 +10,30 @@ import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { openAPI } from "better-auth/plugins";
 
+// Get baseURL from environment or infer from Vercel
+const getBaseURL = () => {
+  // Check for explicit BETTER_AUTH_URL first
+  if (process.env.BETTER_AUTH_URL) {
+    return process.env.BETTER_AUTH_URL;
+  }
+
+  // On Vercel, use VERCEL_URL for preview deployments
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
+  }
+
+  // For production, use VERCEL_PROJECT_PRODUCTION_URL if available
+  if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
+    return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
+  }
+
+  // Fallback for local development
+  return process.env.BASE_URL || "http://localhost:8080";
+};
+
 export const auth = betterAuth({
+  baseURL: getBaseURL(),
+  basePath: "/api/auth",
   database: drizzleAdapter(db, {
     provider: "pg",
     schema: {
@@ -64,13 +87,10 @@ export const auth = betterAuth({
   rateLimit: {
     enabled: true,
   },
+  // Disable crossSubDomainCookies on Vercel to avoid cookie issues
+  // Vercel preview deployments use different subdomains which can cause cookie problems
   crossSubDomainCookies: {
-    enabled: true,
-    defaultCookieAttributes: {
-      sameSite: "none",
-      secure: true,
-      partitioned: true, // New browser standards will mandate this for foreign cookies
-    },
+    enabled: false,
   },
   experimental: { joins: true },
   plugins: [openAPI()],
