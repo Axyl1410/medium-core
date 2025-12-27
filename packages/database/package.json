@@ -23,9 +23,9 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.0.2",
+    "@workspace/utils": "workspace:*",
     "dotenv": "^17.2.3",
-    "drizzle-orm": "^0.45.1",
-    "mysql2": "^3.16.0",
-    "@workspace/utils": "workspace:*"
+    "drizzle-orm": "^0.45.1"
   }
 }

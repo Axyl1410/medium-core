@@ -1,6 +1,6 @@
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import express from "express";
-import path from "path";
-import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -8,7 +8,7 @@ const __dirname = path.dirname(__filename);
 const app = express();
 
 // Home route - HTML
-app.get("/", (req, res) => {
+app.get("/", (_req, res) => {
   res.type("html").send(`
     <!doctype html>
     <html>
@@ -32,12 +32,12 @@ app.get("/", (req, res) => {
   `);
 });
 
-app.get("/about", (req, res) => {
+app.get("/about", (_req, res) => {
   res.sendFile(path.join(__dirname, "..", "components", "about.htm"));
 });
 
 // Example API endpoint - JSON
-app.get("/api-data", (req, res) => {
+app.get("/api-data", (_req, res) => {
   res.json({
     message: "Here is some sample API data",
     items: ["apple", "banana", "cherry"],
@@ -45,7 +45,7 @@ app.get("/api-data", (req, res) => {
 });
 
 // Health check
-app.get("/healthz", (req, res) => {
+app.get("/healthz", (_req, res) => {
   res.status(200).json({ status: "ok", timestamp: new Date().toISOString() });
 });
 
@@ -54,8 +54,8 @@ app.use(express.static(path.join(__dirname, "..", "public")));
 
 // Start server when running directly (not in serverless mode)
 if (import.meta.main) {
-  const port = process.env.PORT || 3000;
-  app.listen(port, () => {
+  const port = process.env.PORT || 8080;
+  app.listen(Number(port), () => {
     console.log(`🚀 Server running at http://localhost:${port}`);
   });
 }

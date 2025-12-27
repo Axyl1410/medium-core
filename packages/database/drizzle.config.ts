@@ -5,8 +5,7 @@ import { defineConfig } from "drizzle-kit";
 export default defineConfig({
   out: "./drizzle",
   schema: "./src/db/schema.ts",
-  //todo: change to postgres later
-  dialect: "mysql",
+  dialect: "postgresql",
   dbCredentials: {
     url: assertValue(
       process.env.DATABASE_URL,

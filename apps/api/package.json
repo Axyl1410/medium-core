@@ -2,9 +2,8 @@
   "name": "api",
   "type": "module",
   "scripts": {
-    "dev": "bun run src/index.ts",
-    "start": "bun run src/index.ts",
-    "build": "echo 'No build step required for Bun'",
+    "dev": "bun --watch src/index.ts",
+    "start": "bun src/index.ts",
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
