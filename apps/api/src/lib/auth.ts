@@ -1,4 +1,10 @@
-import { account, db, session, user, verification } from "@workspace/database";
+import { db } from "@workspace/database";
+import {
+  account,
+  session,
+  user,
+  verification,
+} from "@workspace/database/db/schema";
 import { assertValue } from "@workspace/utils";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
