@@ -1,6 +1,6 @@
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/examples/tree/main/framework-boilerplates/express-bun&template=express)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/examples/tree/main/framework-boilerplates/hono-bun&template=hono)
 
-Live Example: https://example-express-bun.vercel.app/
+Live Example: https://example-hono-bun.vercel.app/
 
 Prerequisites:
 
