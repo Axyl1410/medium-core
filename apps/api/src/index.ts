@@ -11,7 +11,7 @@ const app = new Hono<{
 }>();
 
 const welcomeStrings = [
-  `Hello Hono from Bun ${process.versions.bun}!`,
+  `Hello Hono from Bun ${process.versions?.bun ?? "unknown"}!`,
   "To learn more about Hono + Bun on Vercel, visit https://vercel.com/docs/frameworks/backend/hono",
 ];
 
@@ -28,18 +28,26 @@ app.use(
 );
 
 app.use("*", async (c, next) => {
-  const session = await auth.api.getSession({ headers: c.req.raw.headers });
+  try {
+    const session = await auth.api.getSession({ headers: c.req.raw.headers });
 
-  if (!session) {
+    if (!session) {
+      c.set("user", null);
+      c.set("session", null);
+      await next();
+      return;
+    }
+
+    c.set("user", session.user);
+    c.set("session", session.session);
+    await next();
+  } catch (error) {
+    // Log session retrieval errors but don't block the request
+    console.error("Session retrieval error:", error);
     c.set("user", null);
     c.set("session", null);
     await next();
-    return;
   }
-
-  c.set("user", session.user);
-  c.set("session", session.session);
-  await next();
 });
 
 app.on(["POST", "GET"], "/api/auth/*", async (c) => {

@@ -50,31 +50,31 @@ export const auth = betterAuth({
     github: {
       clientId: assertValue(
         process.env.GITHUB_CLIENT_ID,
-        "Missing GITHUB_CLIENT_ID"
+        "Missing GITHUB_CLIENT_ID environment variable. Set it in your Vercel project settings."
       ),
       clientSecret: assertValue(
         process.env.GITHUB_CLIENT_SECRET,
-        "Missing GITHUB_CLIENT_SECRET"
+        "Missing GITHUB_CLIENT_SECRET environment variable. Set it in your Vercel project settings."
       ),
     },
     discord: {
       clientId: assertValue(
         process.env.DISCORD_CLIENT_ID,
-        "Missing DISCORD_CLIENT_ID"
+        "Missing DISCORD_CLIENT_ID environment variable. Set it in your Vercel project settings."
       ),
       clientSecret: assertValue(
         process.env.DISCORD_CLIENT_SECRET,
-        "Missing DISCORD_CLIENT_SECRET"
+        "Missing DISCORD_CLIENT_SECRET environment variable. Set it in your Vercel project settings."
       ),
     },
     google: {
       clientId: assertValue(
         process.env.GOOGLE_CLIENT_ID,
-        "Missing GOOGLE_CLIENT_ID"
+        "Missing GOOGLE_CLIENT_ID environment variable. Set it in your Vercel project settings."
       ),
       clientSecret: assertValue(
         process.env.GOOGLE_CLIENT_SECRET,
-        "Missing GOOGLE_CLIENT_SECRET"
+        "Missing GOOGLE_CLIENT_SECRET environment variable. Set it in your Vercel project settings."
       ),
     },
   },
