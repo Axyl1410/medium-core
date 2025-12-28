@@ -18,6 +18,7 @@ const sql = neon(databaseUrl);
 // Pass schema vào hàm drizzle để có autocomplete tốt hơn
 export const db = drizzle(sql, { schema });
 
-// TUYỆT ĐỐI KHÔNG DÙNG:
-// export * from "drizzle-orm";
-// export * from "./db/schema";
+// --- QUAN TRỌNG: Export schema để tránh race condition khi load module ---
+// Xuất khẩu toàn bộ schema ra ngoài thông qua index
+// biome-ignore lint/performance/noBarrelFile: Cần thiết để tránh lỗi "Requested module is not instantiated yet"
+export * from "./db/schema";
